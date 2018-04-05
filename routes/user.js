@@ -16,4 +16,13 @@ router.get('/about', function (req, res) {
   res.send('About birds')
 });
 
+// define the about route
+router.get('/users', function (req, res) {
+  let value = {};
+  user.find(value, function(err, results){
+    if(err) res.json(err);
+    res.json(results);
+  });
+});
+
 module.exports = router;

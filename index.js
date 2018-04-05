@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const cors = require('cors');
 const port = process.env.PORT || 3000;
 const user = require('./routes/user');
 const bodyParser = require('body-parser');
@@ -16,6 +17,7 @@ db.once('open', function() {
   console.log('// we are connected!');
 });
 
+app.use(cors());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
