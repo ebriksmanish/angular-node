@@ -16,4 +16,17 @@ router.get('/about', function (req, res) {
   res.send('About birds')
 });
 
+// define the about route
+router.post('/register', function (req, res) {
+  let value = {
+    username : req.body.username,
+    email : req.body.email,
+    password : req.body.password
+  };
+  user.create(value, function(err, result){
+    if(err) res.json(err);
+    res.json(result);
+  });
+});
+
 module.exports = router;
