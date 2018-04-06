@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { Config } from '../../interfaces/config';
 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -21,7 +22,12 @@ export class ProfileComponent implements OnInit {
   showConfig() {
     this.configService.getConfig()
       // clone the data object, using its known Config shape
-      .subscribe(data => this.configs = data );
+      .subscribe(config => this.configs = config );
   }
+
+  deleteUser(){
+    this.configService.deleteConfig().subscribe();
+  }
+
 
 }

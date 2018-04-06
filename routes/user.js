@@ -15,5 +15,24 @@ router.get('/', function (req, res) {
 router.get('/about', function (req, res) {
   res.send('About birds')
 });
+// define the about route
+router.get('/users', function (req, res) {
+  let value = {};
+  user.find(value, function(err, results){
+    if(err) res.json(err);
+    res.json(results);
+  });
+});
+
+// define the about route
+router.delete('/user', function (req, res) {
+  let criteria ={
+    email : req.body.email
+};
+user.remove(criteria,function(err, results){
+    if(err) return res.json(err);
+    else return res.json(results);
+});
+});
 
 module.exports = router;

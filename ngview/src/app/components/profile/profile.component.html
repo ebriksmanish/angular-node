@@ -1,11 +1,12 @@
 <div class="jumbotron jumbotron-fluid">
-  <div class="container text-center">
-    <h1 class="display-4">Profile</h1>
-    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-    <ul class="list-group" *ngFor="let config of configs">
-        <li class="list-group-item">{{config.username}}  
-        </li>
+    <div class="container text-center">
+      <h1 class="display-4">Profile</h1>
+      <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+      <ul class="list-group" *ngFor="let config of configs">
+          <li class="list-group-item">{{config.username}}  
+            <button type="button" class="btn btn-danger float-right" (click)="deleteUser()">Delete</button>
+          </li>
 
-    </ul>
+        </ul>
+    </div>
   </div>
-</div>
