@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const path = require('path');
 const port = process.env.PORT || 3000;
 const user = require('./routes/user');
@@ -20,6 +21,8 @@ db.once('open', function() {
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
+// ...
+app.use(cors());
 // ...
 app.use('/api', user);
 app.get('/', (req, res) => res.send('Hello World!'));
