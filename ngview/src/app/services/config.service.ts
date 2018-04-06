@@ -17,6 +17,7 @@ export class ConfigService {
   constructor(private http: HttpClient) { }
   getUrl = 'http://localhost:3000/api/users';
   deleteUrl = 'http://localhost:3000/api/user';
+
   getConfig() {
     // now returns an Observable of Config
     return this.http.get<Config>(this.getUrl);

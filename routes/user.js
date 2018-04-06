@@ -24,15 +24,15 @@ router.get('/users', function (req, res) {
   });
 });
 
-// define the about route
+// delete api
 router.delete('/user', function (req, res) {
   let criteria ={
-    email : req.body.email
-};
-user.remove(criteria,function(err, results){
-    if(err) return res.json(err);
-    else return res.json(results);
-});
+      email : req.body.email
+  };
+  user.remove(criteria,function(err, results){
+      if(err) return res.json(err);
+      else return res.json(results);
+  });
 });
 
 module.exports = router;
