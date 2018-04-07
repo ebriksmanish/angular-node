@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   constructor(private configService: ConfigService,private router: Router) { }
 
   ngOnInit() {
+    this.showConfig()
   }
   config : Config;
   configs : any;
@@ -28,9 +29,15 @@ export class RegisterComponent implements OnInit {
       password: this.password
     };
     this.configService.addConfig(newConfig)
-    .subscribe(config => this.configs.push(config));
-    this.router.navigate(['/login']);
-    return false;    
+    .subscribe(config => {
+      if(this.configs = config){
+        this.configs.push(config)
+        this.router.navigate(['/login']);
+      }
+      else{
+        this.router.navigate(['/register']);
+      }
+    })    
   }
 
 }

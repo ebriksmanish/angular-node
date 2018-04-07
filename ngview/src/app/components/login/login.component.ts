@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-    config : Config;
+  config : Config;
   configs : any;
   
   
@@ -28,10 +28,17 @@ export class LoginComponent implements OnInit {
       password: this.password
     };
     this.configService.logConfig(newConfiged)
-    // .subscribe(config => this.configs);
-    .subscribe(data => this.configs = data );
-    this.router.navigate(['/dashboard']);
-    return false;    
+    .subscribe(data => {
+        if(this.configs = data ){
+          this.configs.storeUserData(data); 
+          this.router.navigate(['/dashboard']);
+          return false;    
+        }
+        else{
+          this.router.navigate(['/login']);
+          return false;    
+        }
+      });
   }
 
 }

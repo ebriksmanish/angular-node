@@ -15,6 +15,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 
 import { ConfigService } from './services/config.service';
+import { AuthGuard } from './guard/auth.guard';
 
 
 const appRoutes: Routes = [
@@ -56,7 +57,7 @@ const appRoutes: Routes = [
     )
     // other imports here
   ],
-  providers: [ConfigService],
+  providers: [ConfigService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

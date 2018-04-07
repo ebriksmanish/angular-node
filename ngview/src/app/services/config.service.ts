@@ -13,6 +13,9 @@ const httpOptions = {
 
 @Injectable()
 export class ConfigService {
+  
+  configToken: any;
+  config: any;
 
   constructor(private http: HttpClient) { }
   
@@ -42,6 +45,27 @@ export class ConfigService {
 
   logConfig (config: Config): Observable<Config> {
     return this.http.post<Config>(this.loginUrl, config, httpOptions)
+  }
+
+  storeUserData(token, config) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('config', JSON.stringify(config));
+    this.configToken = token;
+    this.config = config;
+  }
+  loadToken() {
+    const token = localStorage.getItem('token');
+    this.configToken = token;
+  }
+
+  loggedIn() {
+    return true;
+  }
+
+  logout() {
+    this.configToken = null;
+    this.config = null;
+    localStorage.clear();
   }
 
 }
