@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { Config } from '../../interfaces/config';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-profile',
@@ -9,19 +11,16 @@ import { Config } from '../../interfaces/config';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private configService: ConfigService) { }
+  constructor(private configService: ConfigService,private router: Router) { }
 
   ngOnInit() {
-    this.showConfig()
   }
 
-  config: Config;
-  configs : any;
-
-  showConfig() {
-    this.configService.getConfig()
-      // clone the data object, using its known Config shape
-      .subscribe(data => this.configs = data );
+  
+  deleteUser(){
+    this.configService.deleteConfig().subscribe()
+    this.router.navigate(['/dashboard']);
+    return null; 
   }
 
 }
