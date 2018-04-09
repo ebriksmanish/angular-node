@@ -16,13 +16,13 @@ export class ConfigService {
 
   constructor(private http: HttpClient) { }
   
-  configUrl = 'http://localhost:3000/api/users';
+  configUrl = 'api/users';
 
-  postUrl = 'http://localhost:3000/api/register';
+  postUrl = 'api/register';
 
-  deleteUrl = 'http://localhost:3000/api/user';
+  deleteUrl = 'api/user';
 
-  loginUrl = 'http://localhost:3000/api/login';
+  loginUrl = 'api/login';
 
   getConfig() {
     // now returns an Observable of Config

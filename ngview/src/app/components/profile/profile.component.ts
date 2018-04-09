@@ -15,7 +15,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  config : Config;
+  configs : any;
+  
   
   deleteUser(){
     this.configService.deleteConfig().subscribe()

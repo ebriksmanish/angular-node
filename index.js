@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // ...
 app.use('/api', user);
-app.get('/', (req, res) => res.send('Hello World!'));
-app.use('/static', express.static(path.join(__dirname, 'public')));
+// app.get('/', (req, res) => res.send('Hello World!'));
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.listen(port, () => console.log('Example app listening on port') + port);
