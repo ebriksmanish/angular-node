@@ -7,7 +7,7 @@ import { HttpHeaders } from '@angular/common/http';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'my-auth-token'
+    'x-access-token': 'myToken'
   })
 };
 
@@ -17,6 +17,8 @@ export class ConfigService {
   constructor(private http: HttpClient) { }
   
   configUrl = 'api/users';
+  
+  meUrl = 'api/me';
 
   postUrl = 'api/register';
 
@@ -42,6 +44,11 @@ export class ConfigService {
 
   logConfig (config: Config): Observable<Config> {
     return this.http.post<Config>(this.loginUrl, config, httpOptions)
+  }
+
+  meConfig() {
+    // now returns an Observable of Config
+    return this.http.get<Config>(this.meUrl);
   }
 
 }

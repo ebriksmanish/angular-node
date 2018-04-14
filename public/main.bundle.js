@@ -80,6 +80,7 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_register_register_component__ = __webpack_require__("./src/app/components/register/register.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_profile_profile_component__ = __webpack_require__("./src/app/components/profile/profile.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__services_config_service__ = __webpack_require__("./src/app/services/config.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_me_me_component__ = __webpack_require__("./src/app/components/me/me.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -100,6 +101,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var appRoutes = [
     { path: 'home', component: __WEBPACK_IMPORTED_MODULE_7__components_home_home_component__["a" /* HomeComponent */] },
     { path: 'register', component: __WEBPACK_IMPORTED_MODULE_10__components_register_register_component__["a" /* RegisterComponent */] },
@@ -109,6 +111,10 @@ var appRoutes = [
         path: 'dashboard',
         component: __WEBPACK_IMPORTED_MODULE_8__components_dashbaord_dashbaord_component__["a" /* DashbaordComponent */],
         data: { title: 'dashboard' }
+    }, {
+        path: 'me',
+        component: __WEBPACK_IMPORTED_MODULE_13__components_me_me_component__["a" /* MeComponent */],
+        data: { title: 'me' }
     },
     { path: '',
         redirectTo: '/home',
@@ -128,7 +134,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_8__components_dashbaord_dashbaord_component__["a" /* DashbaordComponent */],
                 __WEBPACK_IMPORTED_MODULE_9__components_login_login_component__["a" /* LoginComponent */],
                 __WEBPACK_IMPORTED_MODULE_10__components_register_register_component__["a" /* RegisterComponent */],
-                __WEBPACK_IMPORTED_MODULE_11__components_profile_profile_component__["a" /* ProfileComponent */]
+                __WEBPACK_IMPORTED_MODULE_11__components_profile_profile_component__["a" /* ProfileComponent */],
+                __WEBPACK_IMPORTED_MODULE_13__components_me_me_component__["a" /* MeComponent */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -161,7 +168,7 @@ module.exports = ""
 /***/ "./src/app/components/dashbaord/dashbaord.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"jumbotron jumbotron-fluid\">\n    <div class=\"container text-center\">\n      <h1 class=\"display-4\">Dashboard</h1>\n      <p class=\"lead\">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>\n      <ul class=\"list-group\" *ngFor=\"let config of configs\">\n        <li class=\"list-group-item\">{{config.username}}  \n        </li>\n    </ul>\n\n  </div>\n    <div class=\"container text-center\">\n    <p class=\"lead\">\n      <a class=\"btn btn-primary btn-lg\" routerLink=\"/profile\" role=\"button\">To Delete All Users as Once</a>\n    </p>\n      <p class=\"lead\">\n      <a class=\"btn btn-primary btn-lg\" routerLink=\"/login\" role=\"button\">Login</a>\n      <a class=\"btn btn-primary btn-lg\" routerLink=\"/register\" role=\"button\">Register</a>\n    </p>\n  </div>\n  </div>"
+module.exports = "<div class=\"jumbotron jumbotron-fluid\">\n    <div class=\"container text-center\">\n      <h1 class=\"display-4\">Dashboard</h1>\n      <p class=\"lead\">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>\n      <ul class=\"list-group\" *ngFor=\"let config of configs\">\n        <li class=\"list-group-item\">{{config.username}}  {{config.myToken}}  \n        </li>\n    </ul>\n\n  </div>\n    <div class=\"container text-center\">\n    <p class=\"lead\">\n      <a class=\"btn btn-primary btn-lg\" routerLink=\"/profile\" role=\"button\">To Delete All Users as Once</a>\n    </p>\n      <p class=\"lead\">\n      <a class=\"btn btn-primary btn-lg\" routerLink=\"/login\" role=\"button\">Login</a>\n      <a class=\"btn btn-primary btn-lg\" routerLink=\"/register\" role=\"button\">Register</a>\n    </p>\n  </div>\n  </div>"
 
 /***/ }),
 
@@ -336,6 +343,67 @@ var LoginComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/components/me/me.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/components/me/me.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"jumbotron jumbotron-fluid\">\n  <div class=\"container text-center\">\n    <h1 class=\"display-4\">Profile</h1>\n    <button type=\"button\" class=\"btn btn-danger\" (click)=\"meUser()\">Delete All in Once</button>\n    <p class=\"lead\">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/components/me/me.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MeComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_config_service__ = __webpack_require__("./src/app/services/config.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var MeComponent = /** @class */ (function () {
+    function MeComponent(configService, router) {
+        this.configService = configService;
+        this.router = router;
+    }
+    MeComponent.prototype.ngOnInit = function () {
+    };
+    MeComponent.prototype.meUser = function () {
+        this.configService.meConfig().subscribe();
+        this.router.navigate(['/dashboard']);
+        return null;
+    };
+    MeComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-me',
+            template: __webpack_require__("./src/app/components/me/me.component.html"),
+            styles: [__webpack_require__("./src/app/components/me/me.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_config_service__["a" /* ConfigService */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]])
+    ], MeComponent);
+    return MeComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/components/navbar/navbar.component.css":
 /***/ (function(module, exports) {
 
@@ -346,7 +414,7 @@ module.exports = ""
 /***/ "./src/app/components/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">\n  <a class=\"navbar-brand\" routerLink=\"/home\">Navbar</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{ exact: true }\">\n        <a class=\"nav-link\" routerLink=\"/home\">Home</a>\n      </li>\n    </ul>\n    <ul class=\"navbar-nav ml-auto\">\n      <li class=\"nav-item\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{ exact: true }\">\n        <a class=\"nav-link\" routerLink=\"/login\">login</a>\n      </li>\n      <li class=\"nav-item\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{ exact: true }\">\n        <a class=\"nav-link\" routerLink=\"/register\">register</a>\n      </li>\n      <li class=\"nav-item\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{ exact: true }\">\n        <a class=\"nav-link\" routerLink=\"/profile\">profile</a>\n      </li>\n    </ul>\n  </div>\n</nav>"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">\n  <a class=\"navbar-brand\" routerLink=\"/home\">Navbar</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{ exact: true }\">\n        <a class=\"nav-link\" routerLink=\"/home\">Home</a>\n      </li>\n    </ul>\n    <ul class=\"navbar-nav ml-auto\">\n      <li class=\"nav-item\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{ exact: true }\">\n        <a class=\"nav-link\" routerLink=\"/login\">login</a>\n      </li>\n      <li class=\"nav-item\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{ exact: true }\">\n        <a class=\"nav-link\" routerLink=\"/register\">register</a>\n      </li>\n      <li class=\"nav-item\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{ exact: true }\">\n        <a class=\"nav-link\" routerLink=\"/profile\">profile</a>\n      </li>\n      <li class=\"nav-item\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{ exact: true }\">\n        <a class=\"nav-link\" routerLink=\"/dashboard\">Dashboard</a>\n      </li>\n      <li class=\"nav-item\" routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{ exact: true }\">\n        <a class=\"nav-link\" routerLink=\"/me\">ME</a>\n      </li>\n    </ul>\n  </div>\n</nav>"
 
 /***/ }),
 
@@ -537,13 +605,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var httpOptions = {
     headers: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]({
         'Content-Type': 'application/json',
-        'Authorization': 'my-auth-token'
+        'x-access-token': 'myToken'
     })
 };
 var ConfigService = /** @class */ (function () {
     function ConfigService(http) {
         this.http = http;
         this.configUrl = 'api/users';
+        this.meUrl = 'api/me';
         this.postUrl = 'api/register';
         this.deleteUrl = 'api/user';
         this.loginUrl = 'api/login';
@@ -562,6 +631,10 @@ var ConfigService = /** @class */ (function () {
     };
     ConfigService.prototype.logConfig = function (config) {
         return this.http.post(this.loginUrl, config, httpOptions);
+    };
+    ConfigService.prototype.meConfig = function () {
+        // now returns an Observable of Config
+        return this.http.get(this.meUrl);
     };
     ConfigService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),

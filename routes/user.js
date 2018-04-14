@@ -1,6 +1,8 @@
 const user = require('../models/schema');
 const express = require('express');
 const router = express.Router();
+// sign with default (HMAC SHA256)
+const jwt = require('jsonwebtoken');
 
 // middleware that is specific to this router
 router.use(function timeLog (req, res, next) {
@@ -56,7 +58,27 @@ router.post('/login', function (req, res) {
   };
   user.findOne(criteria,function(err, result){
       if(err) return res.json(err);
-      else return res.json(result);
+      else if(result){
+        let myToken = jwt.sign({ id: user._id }, "secretkey", { expiresIn: 86400 });
+        console.log('token',myToken);
+        // 
+        user.create({myToken : myToken});
+        return res.json({ result : result, token : myToken})
+    }   
+  });
+});
+
+// verifying nothing else
+// x-access-token in header and token number , only one parameter
+router.get('/me', function(req, res) {
+  let myToken = req.headers['x-access-token'];
+  if (!myToken) return res.status(401).send({ auth: false, message: 'No token provided.' });
+  
+  jwt.verify(myToken, "secretkey", function(err, decoded) {
+    if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+    // res.status(200).send(decoded);
+    console.log('yahoo', decoded);
+    return res.json({decoded: decoded, message: 'yahooo'})
   });
 });
 

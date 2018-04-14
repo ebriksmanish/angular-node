@@ -15,6 +15,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 
 import { ConfigService } from './services/config.service';
+import { MeComponent } from './components/me/me.component';
 
 
 const appRoutes: Routes = [
@@ -26,6 +27,10 @@ const appRoutes: Routes = [
     path: 'dashboard',
     component: DashbaordComponent,
     data: { title: 'dashboard' }
+  },{
+    path: 'me',
+    component: MeComponent,
+    data: { title: 'me' }
   },
   { path: '',
     redirectTo: '/home',
@@ -42,7 +47,8 @@ const appRoutes: Routes = [
     DashbaordComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    MeComponent,
   ],
   imports: [
     BrowserModule,

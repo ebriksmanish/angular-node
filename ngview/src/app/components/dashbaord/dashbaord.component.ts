@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashbaord.component.css']
 })
 export class DashbaordComponent implements OnInit {
-
+  public myToken: any;
   constructor(private configService: ConfigService,private router: Router) { }
 
   ngOnInit() {

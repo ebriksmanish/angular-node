@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-    config : Config;
+  config : Config;
   configs : any;
   
   
