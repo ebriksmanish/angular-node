@@ -51,7 +51,7 @@ router.delete('/user', function (req, res) {
 // login api
 router.post('/login', function (req, res) {
   let criteria ={
-      email : req.body.email,
+      username : req.body.username,
       password : req.body.password
   };
   user.findOne(criteria,function(err, result){

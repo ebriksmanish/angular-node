@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   username: string;
-  email: string;
   password: string;
 
   constructor(private configService: ConfigService,private router: Router) { }
@@ -24,14 +23,18 @@ export class LoginComponent implements OnInit {
   logedConfig() {
     const newConfiged = {
       username: this.username,
-      email: this.email,
       password: this.password
     };
     this.configService.logConfig(newConfiged)
     // .subscribe(config => this.configs);
-    .subscribe(data => this.configs = data );
-    this.router.navigate(['/dashboard']);
-    return false;    
+    .subscribe(data => {
+      if(data){
+      this.configs = data
+      this.router.navigate(['/dashboard']);
+      } else{
+      this.router.navigate(['/login']);
+      }
+    } );
   }
 
 }
