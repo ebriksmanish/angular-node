@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   username: string;
   password: string;
-
+  // user: any;
   constructor(private configService: ConfigService,private router: Router) { }
 
   ngOnInit() {
@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   config : Config;
   configs : any;
   myToken : any;
+
   
   
   logedConfig() {
@@ -33,7 +34,8 @@ export class LoginComponent implements OnInit {
       if(data){
       // this.configService.storeUserData(data);
       this.configs = data;
-      localStorage.setItem('token', data.myToken)
+      localStorage.setItem('token', data.myToken);
+      localStorage.setItem('user', JSON.stringify(newConfiged));
       this.router.navigate(['/dashboard']);
       } else{
       this.router.navigate(['/login']);

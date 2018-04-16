@@ -15,6 +15,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 
 import { ConfigService } from './services/config.service';
+import { AuthComponent } from './components/auth/auth.component';
 
 
 const appRoutes: Routes = [
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'auth', component: AuthComponent },
   {
     path: 'dashboard',
     component: DashbaordComponent,
@@ -42,7 +44,8 @@ const appRoutes: Routes = [
     DashbaordComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

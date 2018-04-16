@@ -11,9 +11,19 @@ const httpOptions = {
   })
 };
 
+// let Token= localStorage.getItem('token');
+// const httpOptions = {
+//  headers: new HttpHeaders({
+//  'Content-Type':  'application/json',
+//  'x-access-token': Token
+//    })
+//  };
+
+
 @Injectable()
 export class ConfigService {
   // authToken: any;
+  myToken : any;
 
   constructor(private http: HttpClient) { }
   
@@ -24,6 +34,8 @@ export class ConfigService {
   deleteUrl = 'http://localhost:3000/api/user';
 
   loginUrl = 'http://localhost:3000/api/login';
+
+  authUrl = 'http://localhost:3000/api/auth/profile';
 
   getConfig() {
     // now returns an Observable of Config
@@ -45,8 +57,17 @@ export class ConfigService {
     return this.http.post<Config>(this.loginUrl, config, httpOptions)
   }
 
-  myToken : any;
 
+  authConfig() {
+    // now returns an Observable of Config
+    let myToken = localStorage.getItem('token');
+    httpOptions.headers =
+    // httpOptions.headers.set('x-access-token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MjM4NzUwODEsImV4cCI6MTUyMzk2MTQ4MX0.jjZlZsNPX19ARmm7gVl-skc9FSf9ky4gAmTS-x2yBQA');
+    httpOptions.headers.set('x-access-token', myToken);
+    return this.http.get<Config>(this.authUrl, httpOptions);
+  }
+
+  // results:
   // getToken() {
   //   return localStorage.myToken
   // }
