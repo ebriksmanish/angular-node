@@ -1,3 +1,4 @@
 export interface Config {
-    username : string
+    username : string,
+    myToken : any
 }

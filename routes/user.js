@@ -1,6 +1,11 @@
 const user = require('../models/schema');
 const express = require('express');
 const router = express.Router();
+const auth = require('./auth');
+
+// Requiring JsonWebToken
+
+const jwt = require('jsonwebtoken');
 
 // middleware that is specific to this router
 router.use(function timeLog (req, res, next) {
@@ -56,8 +61,40 @@ router.post('/login', function (req, res) {
   };
   user.findOne(criteria,function(err, result){
       if(err) return res.json(err);
-      else return res.json(result);
+      else if(result){
+        let myToken = jwt.sign({ id: user._id }, "secretkey", { expiresIn: 86400 });
+        console.log('token 2 token', myToken);
+        // return res.json({ result : result, token : myToken})
+        return res.status(200).send({myToken});
+    }   
   });
 });
+
+// verifying nothing else
+// x-access-token in header and token number , only one parameter
+router.get('/me', function(req, res) {
+  let myToken = req.headers['x-access-token'];
+  if (!myToken) return res.status(401).send({ auth: false, message: 'No token provided.' });
+  
+  jwt.verify(myToken, "secretkey", function(err, decoded) {
+    if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+    return res.json({decoded: decoded, message: 'yahoo'})
+    // res.status(200).send(decoded);
+  });
+});
+
+
+router.use('/auth/*', function(req, res, next) {
+  let myToken = req.headers['x-access-token'];
+  if (!myToken) return res.status(401).send({ auth: false, message: 'No token provided.' });
+  
+  jwt.verify(myToken, "secretkey", function(err, decoded) {
+    if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+    return next()
+    // res.status(200).send(decoded);
+  });
+});
+
+router.use('/auth', auth);
 
 module.exports = router;

@@ -308,18 +308,28 @@ var LoginComponent = /** @class */ (function () {
         var _this = this;
         var newConfiged = {
             username: this.username,
-            password: this.password
+            password: this.password,
+            myToken: this.myToken
         };
         this.configService.logConfig(newConfiged)
             .subscribe(function (data) {
             if (data) {
+                // this.configService.storeUserData(data);
                 _this.configs = data;
+                localStorage.setItem('token', data.myToken);
                 _this.router.navigate(['/dashboard']);
             }
             else {
                 _this.router.navigate(['/login']);
             }
         });
+        // .subscribe(
+        //   res => {
+        //     localStorage.setItem('token', myToken)
+        //     this.router.navigate(['/dashboard'])
+        //   },
+        //   err => console.log(err)
+        // )  
     };
     LoginComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -493,7 +503,8 @@ var RegisterComponent = /** @class */ (function () {
         var newConfig = {
             username: this.username,
             email: this.email,
-            password: this.password
+            password: this.password,
+            myToken: this.myToken
         };
         this.configService.addConfig(newConfig)
             .subscribe(function (config) { return _this.configs.push(config); });
@@ -537,16 +548,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var httpOptions = {
     headers: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]({
         'Content-Type': 'application/json',
-        'Authorization': 'my-auth-token'
+        'x-access-token': 'myToken'
     })
 };
 var ConfigService = /** @class */ (function () {
+    // authToken: any;
     function ConfigService(http) {
         this.http = http;
-        this.configUrl = 'api/users';
-        this.postUrl = 'api/register';
-        this.deleteUrl = 'api/user';
-        this.loginUrl = 'api/login';
+        this.configUrl = 'http://localhost:3000/api/users';
+        this.postUrl = 'http://localhost:3000/api/register';
+        this.deleteUrl = 'http://localhost:3000/api/user';
+        this.loginUrl = 'http://localhost:3000/api/login';
     }
     ConfigService.prototype.getConfig = function () {
         // now returns an Observable of Config

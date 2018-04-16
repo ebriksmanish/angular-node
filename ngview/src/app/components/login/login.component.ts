@@ -16,25 +16,37 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-    config : Config;
+  config : Config;
   configs : any;
+  myToken : any;
   
   
   logedConfig() {
     const newConfiged = {
       username: this.username,
-      password: this.password
+      password: this.password,
+      myToken : this.myToken
     };
     this.configService.logConfig(newConfiged)
     // .subscribe(config => this.configs);
     .subscribe(data => {
       if(data){
-      this.configs = data
+      // this.configService.storeUserData(data);
+      this.configs = data;
+      localStorage.setItem('token', data.myToken)
       this.router.navigate(['/dashboard']);
       } else{
       this.router.navigate(['/login']);
       }
     } );
+    // .subscribe(
+    //   res => {
+    //     localStorage.setItem('token', myToken)
+    //     this.router.navigate(['/dashboard'])
+    //   },
+    //   err => console.log(err)
+    // )  
+
   }
 
 }

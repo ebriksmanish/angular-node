@@ -7,22 +7,23 @@ import { HttpHeaders } from '@angular/common/http';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'my-auth-token'
+    'x-access-token': 'myToken'
   })
 };
 
 @Injectable()
 export class ConfigService {
+  // authToken: any;
 
   constructor(private http: HttpClient) { }
   
-  configUrl = 'api/users';
+  configUrl = 'http://localhost:3000/api/users';
 
-  postUrl = 'api/register';
+  postUrl = 'http://localhost:3000/api/register';
 
-  deleteUrl = 'api/user';
+  deleteUrl = 'http://localhost:3000/api/user';
 
-  loginUrl = 'api/login';
+  loginUrl = 'http://localhost:3000/api/login';
 
   getConfig() {
     // now returns an Observable of Config
@@ -44,4 +45,16 @@ export class ConfigService {
     return this.http.post<Config>(this.loginUrl, config, httpOptions)
   }
 
+  myToken : any;
+
+  // getToken() {
+  //   return localStorage.myToken
+  // }
+
+
+  
+  // storeUserData(data) {
+  //   localStorage.setItem('token', "kavi");
+  //   // this.authToken = token;
+  // }
 }

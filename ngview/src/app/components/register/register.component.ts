@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
   username: string;
   email: string;
   password: string;
+  myToken : any;
 
   constructor(private configService: ConfigService,private router: Router) { }
 
@@ -25,7 +26,8 @@ export class RegisterComponent implements OnInit {
     const newConfig = {
       username: this.username,
       email: this.email,
-      password: this.password
+      password: this.password,
+      myToken : this.myToken
     };
     this.configService.addConfig(newConfig)
     .subscribe(config => this.configs.push(config));
